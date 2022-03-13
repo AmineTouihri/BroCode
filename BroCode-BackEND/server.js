@@ -1,5 +1,7 @@
 const dotenv = require('dotenv');
 const express = require('express');
+const  Connection  = require('./config/DBConnection.js');
+Connection();
 dotenv.config()
 const app = express();
 app.get('/',function (req, res) {
