@@ -6,4 +6,5 @@ const Connection = () => {
         .then(() => console.log("Connected Successfully"))
         .catch(err => console.log("Connection Failed", err));
 };
+
 module.exports = Connection;

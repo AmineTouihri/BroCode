@@ -6,8 +6,7 @@
   "scripts": {
     "start": "pm2 start server.js --watch",
     "stop": "pm2 stop server.js --watch",
-    "restart" : "pm2 restart server.js --watch"
-
+    "restart": "pm2 restart server.js --watch"
   },
   "author": "",
   "license": "ISC",
