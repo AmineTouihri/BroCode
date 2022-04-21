@@ -5,7 +5,7 @@ Connection();
 dotenv.config()
 const app = express();
 app.get('/',function (req, res) {
-    res.send('Welcome')
+    res.send('Welcome hazem')
 });
 const PORT = process.env.PORT|| 5000;
 app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}...`))
