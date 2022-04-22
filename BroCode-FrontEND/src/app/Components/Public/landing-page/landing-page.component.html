@@ -3,17 +3,7 @@
 <!-- begin  frist view child containe navbar and intrducing section-->
 <div class="firstChild">
 <!--  begin navbar -->
-  <div class="navbar">
-    <div class="container">
-      <div id="logo">BroCode</div>
-      <div class="items">
-        <div class="item">home</div>
-        <div class="item">about</div>
-        <div class="item" routerLink="/register">signup</div>
-      </div>
-
-    </div>
-  </div>
+  <app-nav-bar></app-nav-bar>
 <!--  end navbar-->
 <!--  begin introduction section-->
   <div class="int">
@@ -24,7 +14,7 @@
 
       <form  style="height: 100%;display: flex ; justify-content: space-between">
 
-        <input type="text" style="height: 100%; width: 75% ; border-radius: 25px  ; border: none ; outline: none " placeholder="enter your e_mail to join us ">
+        <input type="text" style="height: 100%;padding: 1rem ; width: 75% ; border-radius: 25px  ; border: none ; outline: none " placeholder="enter your e_mail to join us ">
         <button type="submit"  style="background-color:#15ccbe; z-index: 10 ; width: 40%;
          height: 100%; border-radius: 25px ; border: none ; outline: none ; color: whitesmoke ; font-size: larger ; font-weight: bold ">join us</button>
       </form>
