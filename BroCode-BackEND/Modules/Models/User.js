@@ -3,7 +3,7 @@ const UniqueValidator=require("mongoose-unique-validator");
 const userSchema=mongosse.Schema({
     email:{type:String ,require:true,unique:true},
     password:{type:String,require:true},
-    name:{type:String,require:false},
+    name:{type:String,require:true},
     Status:{type:String,require:false}
 })
 userSchema.plugin(UniqueValidator);

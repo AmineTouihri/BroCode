@@ -4,6 +4,9 @@ const bodyParser=require("body-parser");
 const express=require("express");
 const app=express();
 
+const  Connection  = require('./config/DBConnection.js');
+Connection();
+
 
 app.use(bodyParser.json);
 //----------------------------setHeaders------------------------------------------------
@@ -16,6 +19,8 @@ app.use((req,res,next)=>{
 
 //-----------------------------userRoute----------------
 app.use("api/user",userRoutes);
+app.get("/",()=>{
+    console.log("helo")})
 
 //------------------------
 module.exports=app;

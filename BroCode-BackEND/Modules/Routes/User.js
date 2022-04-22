@@ -9,7 +9,8 @@ route.post("/signUp",(req,res,next)=>{
 bcrypt.hash(req.body.password,10).then(hash=>{
     const user=new User({
         email:req.body.email,
-        password:hash
+        password:hash,
+        name:req.body.name
     });
     user.save().then(result=>{
         res.status(201).json({message:"user added succesfuly",result:result})
