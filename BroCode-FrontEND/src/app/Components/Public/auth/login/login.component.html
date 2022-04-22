@@ -17,14 +17,14 @@
         </p>
         <!--        <p style="align-self: flex-start ; color: black">new here ? <span style="color: #15ccbe">join us</span></p>-->
       </header>
-      <form >
+      <form (submit)="onSubmit(myForm)" #myForm="ngForm">
         <div style="width: 100%">
           <label > email</label><br>
-          <input type="email" placeholder="enter your mail">
+          <input type="email" placeholder="enter your mail" name="email" ngModel required #email="ngModel" email>
         </div>
         <div style="width: 100%">
           <label >password</label><br>
-          <input type="password" placeholder="enter your password">
+          <input type="password" placeholder="enter your password" name="password" ngModel required #password="ngModel">
         </div>
 
         <button type="submit" style="align-self: flex-start ; width: 35% ; height: 3rem; border-radius: 25px ;

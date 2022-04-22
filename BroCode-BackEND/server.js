@@ -1,11 +1,10 @@
 const dotenv = require('dotenv');
-const express = require('express');
-const  Connection  = require('./config/DBConnection.js');
-Connection();
+const app=require("./app");
+const http=require("http");
+
 dotenv.config()
-const app = express();
-app.get('/',function (req, res) {
-    res.send('Welcome hazem')
-});
+
 const PORT = process.env.PORT|| 5000;
-app.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}...`))
+app.set("PORT",PORT)
+const server=http.createServer(app)
+server.listen(PORT, () => console.log(`Server Running on Port: http://localhost:${PORT}...`))

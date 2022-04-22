@@ -27,10 +27,11 @@ const auth:authModel={email:email,password:password}
   }
   //----------------------------register---------------------------------
 
-  createUser(email:string,password:string){
-  const user:authModel={email:email,password:password}
-    this.http.post('http://localhost:8000/api/user/signup',user).subscribe(result=>{
-      console.log("result");
+  createUser(email:string,password:string,name:string){
+  const user={email:email,password:password,name:name}
+    console.log(user)
+    this.http.post('http://localhost:8000/api/user/signUp',user).subscribe(result=>{
+      console.log(result);
     })
   }
 
