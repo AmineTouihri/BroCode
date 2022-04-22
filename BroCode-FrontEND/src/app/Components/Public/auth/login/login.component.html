@@ -1,4 +1,41 @@
-<p class=" m-5 bg-red-300 flex">hello hazem ben saria </p>
-<p class=" m-5 bg-red-300 flex">hello hazem ben  </p>
-<p class=" m-5 bg-red-300 flex">hello hazem ben saria </p>
+<div class="father">
+  <!--  begin navbar-->
+  <app-nav-bar></app-nav-bar>
+  <!--  end navbar -->
+  <div class="firstChild">
+    <!--    begin of the text area -->
+    <div class="txt" style="display: flex ; flex-direction: column ; align-items: center ; justify-content: center ; gap: 5%">
+      <p style="font-size: xx-large ; font-weight: 600 ; line-height: 150% ; margin-bottom: 1rem">Manage all your data at just one place.</p>
+      <p style="line-height: 1.6 ; font-size: large">Best in class big data software and
+        analytics services will render your huge chunks into meaningful data.</p>
+    </div>
+    <!--    end of the formulaire area -->
+    <div class="formulaire">
+      <header style="height: 20%; width: 100% ; display: flex ; justify-content: space-around ;color: #15ccbe ; flex-direction: column ; ">
+        <p style="font-weight: 500 ; font-family: 'Dosis', sans-serif; font-size: larger">
+          Register For more features and opportunity
+        </p>
+        <!--        <p style="align-self: flex-start ; color: black">new here ? <span style="color: #15ccbe">join us</span></p>-->
+      </header>
+      <form >
+        <div style="width: 100%">
+          <label > email</label><br>
+          <input type="email" placeholder="enter your mail">
+        </div>
+        <div style="width: 100%">
+          <label >password</label><br>
+          <input type="password" placeholder="enter your password">
+        </div>
+
+        <button type="submit" style="align-self: flex-start ; width: 35% ; height: 3rem; border-radius: 25px ;
+         background-color: #15ccbe; border: none ; outline: none;  color: white ; font-size: larger">sign me up</button>
+      </form>
+      <footer style="height: 20%; display: flex ; flex-direction: column ; gap: 15%">
+        <p routerLink="/forget-password" style="color: #15ccbe">forget your password ?</p>
+        <p>*We never share your details and that's a promise.</p>
+      </footer>
+
+    </div>
+  </div>
+</div>
 
