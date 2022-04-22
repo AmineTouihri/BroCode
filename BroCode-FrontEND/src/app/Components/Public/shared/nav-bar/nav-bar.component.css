@@ -1,0 +1,30 @@
+.navbar .container{
+  font-family: 'Dosis', sans-serif;
+  height: 100%;
+  display: flex;
+  color: aliceblue;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10%;
+}
+.items{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  color: aliceblue;
+  justify-content: center;
+  align-items: center;
+  gap: 10%;
+
+}
+#logo{
+  font-size: x-large;
+  font-weight: 600;
+  color: #15ccbe;
+}
+
+.navbar{
+
+  height: 6rem;
+
+}
