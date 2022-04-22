@@ -10,9 +10,8 @@ export class authInteractor implements  HttpInterceptor{
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token =this.authService.getToken();
     const authRequest=req.clone({
-      headers:req.headers.set("authorization","bearer "+token)
+      headers:req.headers.set("authorization","bearer " + token)
     });
     return next.handle(authRequest);
   }
-
 }
