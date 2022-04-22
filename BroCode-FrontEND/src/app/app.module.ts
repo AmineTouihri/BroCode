@@ -8,6 +8,7 @@ import {RegisterComponent} from "./Components/Public/auth/register/register.comp
 import { LandingPageComponent} from "./Components/Public/landing-page/landing-page.component";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {authInteractor} from "./Components/Public/auth/auth-Interactor";
+import { NavBarComponent } from './Components/Public/shared/nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {authInteractor} from "./Components/Public/auth/auth-Interactor";
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    LandingPageComponent
+    LandingPageComponent,
+    NavBarComponent
 
   ],
   imports: [
