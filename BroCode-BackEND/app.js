@@ -19,7 +19,7 @@ app.use((req,res,next)=>{
 })
 
 //-----------------------------userRoute----------------
-app.use("/api/user",userRoutes); //i made a mistake here i forgot the / in "api/user"
+app.use("/api/user",userRoutes);
 app.get("/",()=>{
     console.log("helo")})
 

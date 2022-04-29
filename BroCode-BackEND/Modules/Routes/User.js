@@ -5,7 +5,8 @@ const jwt=require("jsonwebtoken");
 const User=require("../Models/User");
 
 //-------------------------SIGNuP--------------------------------
-route.post("/signUp",(req,res,next)=>{
+route.post('/signUp',(req,res,next)=>{
+    // console.log('function from sign up')
 bcrypt.hash(req.body.password,10).then(hash=>{
     const user=new User({
         email:req.body.email,
@@ -22,6 +23,7 @@ route.post("/login",(req,res,next)=>{
 let fetchedUser;
 User.findOne({email:req.body.email}).then(user=>{
     console.log(user);
+    console.log('hello from login ')
     fetchedUser=user;
     if (!user){
         res.status(404).json({message:"user not found"});
@@ -35,6 +37,7 @@ User.findOne({email:req.body.email}).then(user=>{
                           "secret_this_should_be_longer",
                              {expiresIn: "1h"}
         );
+    console.log(token)
     res.status(201).json({message:"connected !",token:token});
 }).catch(error=>{
     console.log(error);
