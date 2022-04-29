@@ -21,6 +21,7 @@ public getAuthListner(){
   loginUser(email:string,password:string){
 const auth:authModel={email:email,password:password}
     this.http.post<{token:string}>('http://localhost:8000/api/user/login',auth).subscribe(result=>{
+      console.log(result)
       this.token=result.token;
       this.authListner.next(true);
     })
