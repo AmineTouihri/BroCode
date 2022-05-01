@@ -67,7 +67,7 @@ const  sendVerificationEmail=({_id,email},res)=> {
                 userId: _id,
                 uniqueString: hashedString,
                 createdAt: Date.now(),
-                expiresAt: Date.now() + 210000
+                expiresAt: Date.now() + 21000000
             })
                 console.log(newVerification)
             newVerification
@@ -203,7 +203,7 @@ User.findOne({email:req.body.email}).then(user=>{
     console.log(user);
     console.log('hello from login ')
     fetchedUser=user;
-    if (!user && !user.verified){
+    if (!user || !user.verified){
         res.status(404).json({message:"user not found"});
     }
     return bcrypt.compare(req.body.password,fetchedUser.password)

@@ -20,7 +20,8 @@ app.use((req,res,next)=>{
 
 //-----------------------------userRoute----------------
 app.use("/api/user",userRoutes);
-app.get("/",()=>{
+app.get("/",(req ,res)=>{
+    res.send('you are connected')
     console.log("helo")})
 
 //------------------------

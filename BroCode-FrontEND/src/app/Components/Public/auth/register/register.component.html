@@ -1,18 +1,23 @@
+<div class="father">
+  <!--  begin navbar-->
+  <app-nav-bar></app-nav-bar>
+  <!--  end navbar -->
+  <form (submit)="onSubmit(myForm)" #myForm="ngForm">
+    <div style="width: 100%">
+      <label > email</label><br>
+      <input type="email" placeholder="enter your mail" name="email" ngModel required #email="ngModel" email>
+    </div>
+    <div style="width: 100%">
+      <label >password</label><br>
+      <input type="password" placeholder="enter your password" name="password" ngModel required #password="ngModel">
+    </div>
+    <div style="width: 100%">
+      <label > User Name</label><br>
+      <input type="text" placeholder="enter your Name" name="name" ngModel required #name="ngModel" >
+    </div>
 
-<form (submit)="onSubmit(myForm)" #myForm="ngForm">
-  <div style="width: 100%">
-    <label > email</label><br>
-    <input type="email" placeholder="enter your mail" name="email" ngModel required #email="ngModel" email>
-  </div>
-  <div style="width: 100%">
-    <label >password</label><br>
-    <input type="password" placeholder="enter your password" name="password" ngModel required #password="ngModel">
-  </div>
-  <div style="width: 100%">
-    <label > User Name</label><br>
-    <input type="text" placeholder="enter your Name" name="name" ngModel required #name="ngModel" >
-  </div>
-
-  <button type="submit" style="align-self: flex-start ; width: 35% ; height: 3rem; border-radius: 25px ;
+    <button type="submit" style="align-self: flex-start ; width: 35% ; height: 3rem; border-radius: 25px ;
          background-color: #15ccbe; border: none ; outline: none;  color: white ; font-size: larger">sign me up</button>
-</form>
+  </form>
+
+</div>
