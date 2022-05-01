@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {authModel} from "../Models/auth-Model";
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ public  getToken(){
 public getAuthListner(){
   return this.authListner;
 }
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient ,  private router :Router ) { }
 
   //------------------------login---------------------------------
   loginUser(email:string,password:string){
@@ -33,6 +34,8 @@ const auth:authModel={email:email,password:password}
     console.log(user)
     this.http.post('http://localhost:8000/api/user/signUp',user).subscribe(result=>{
       console.log(result);
+
+
     })
   }
 

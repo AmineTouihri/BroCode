@@ -10,6 +10,7 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {authInteractor} from "./Components/Public/auth/auth-Interactor";
 import { NavBarComponent } from './Components/Public/shared/nav-bar/nav-bar.component';
 import {FormsModule} from "@angular/forms";
+import { ProfilComponent } from './Components/Public/profil/profil.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import {FormsModule} from "@angular/forms";
     LoginComponent,
     RegisterComponent,
     LandingPageComponent,
-    NavBarComponent
+    NavBarComponent,
+    ProfilComponent
 
   ],
   imports: [

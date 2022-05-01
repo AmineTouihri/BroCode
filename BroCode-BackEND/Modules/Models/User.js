@@ -5,7 +5,7 @@ const userSchema=mongosse.Schema({
     password:{type:String,require:true},
     name:{type:String,require:true},
     Status:{type:String,require:false},
-    verified:String
+    verified:Boolean
 })
 userSchema.plugin(UniqueValidator);
 module.exports=mongosse.model("User",userSchema);
