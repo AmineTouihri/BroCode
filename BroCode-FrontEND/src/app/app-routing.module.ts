@@ -4,6 +4,7 @@ import {LandingPageComponent} from "./Components/Public/landing-page/landing-pag
 import {LoginComponent} from "./Components/Public/auth/login/login.component";
 import {RegisterComponent} from "./Components/Public/auth/register/register.component";
 import {ProfilComponent} from "./Components/Public/profil/profil.component";
+import { HomeComponent } from './Components/Public/home/home.component';
 
 
 const routes: Routes = [
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path : "login" ,  component : LoginComponent},
   {path : "register" ,  component : RegisterComponent},
   {path : "profil" ,  component : ProfilComponent},
+  {path: "home" , component : HomeComponent}
 
 ];
 
