@@ -216,7 +216,7 @@ User.findOne({email:req.body.email}).then(user=>{
                              {expiresIn: "1h"}
         );
     console.log(token)
-    res.status(201).json({message:"connected !",token:token});
+    res.status(201).json({message:"connected !",token:token, id : fetchedUser._id  ,name: fetchedUser.name});
 }).catch(error=>{
     console.log(error);
     res.status(400).json({message:"somthing went wrong!"})

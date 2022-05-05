@@ -1,11 +1,16 @@
 <div class="navbar">
   <div class="container">
-    <div id="logo" routerLink="/">BroCode</div>
+    <div id="logo" class="hover:cursor-pointer " routerLink="/">BroCode</div>
     <div class="items">
       <div class="item" routerLink="/home">home</div>
       <div class="item">about</div>
-      <div class="item" routerLink="/login">log in</div>
-      <div class="item" routerLink="/register" style="background-color: #15ccbe; width: 6em ; height: 2em; display: flex ;
+      <div *ngIf="isconnected"   class="item" routerLink="/home">jobs</div>
+      <div *ngIf="isconnected" class="item" routerLink="/home">bugs</div>
+      <div *ngIf="!isconnected" class="item" routerLink="/login">log in</div>
+      <div *ngIf="isconnected" class="item" routerLink="/profil">profil</div>
+      <div *ngIf="isconnected" class="item" (click)="onlogout()">log out</div>
+
+      <div *ngIf="!isconnected" class="item" routerLink="/register" style="background-color: #15ccbe; width: 6em ; height: 2em; display: flex ;
       justify-content: center ; align-items: center ; border-radius: 15px"><p>sign up</p></div>
     </div>
 
