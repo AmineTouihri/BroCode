@@ -24,13 +24,22 @@ public getAuthListner(){
   //------------------------login---------------------------------
   loginUser(email:string,password:string){
 const auth:authModel={email:email,password:password}
-    this.http.post<{token:string, id:string , name:string}>('http://localhost:8000/api/user/login',auth).subscribe(result=>{
+
+    this.http.post<{token:string, id:string , name:string,isNew:boolean}>('http://localhost:8000/api/user/login',auth).subscribe(result=>{
       console.log(result)
       if(result.token){
+
         this.saveAuthData(result.token , result.id)
         this.islogednow =true ;
         this.token=result.token;
         this.authListner.next(true);
+        if(result.isNew){
+
+          this.router.navigate(["/profil"])
+          this.http.put('http://localhost:8000/api/user/updated',{result:true,id:result.id}).subscribe(()=>{
+            console.log("updated")});
+        }
+        else
         this.router.navigate(['home'])
       }
 
@@ -65,6 +74,7 @@ const auth:authModel={email:email,password:password}
     this.token = ''
     this.clearAuthData()
     this.islogednow=false
+    this.authListner.next(false);
   }
 
   autoAuthUser(){
@@ -74,6 +84,7 @@ const auth:authModel={email:email,password:password}
       const now  = new Date()
       this.token= authInformation
       this.islogednow =true
+      this.authListner.next(true);
     }
   }
 

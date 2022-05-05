@@ -38,7 +38,8 @@ route.post('/signUp',(req,res,next)=>{
             email:req.body.email,
             password:hash,
             name:req.body.name,
-            verified:false
+            verified:false,
+            isNew:true
         });
         user.save().then(result=>{
             console.log(result)
@@ -124,18 +125,18 @@ route.get("/verify/:userId/:uniqueString",(req,res)=>{
                             User.deleteOne({_id:userId})
                                 .then(()=>{
                                     let message= "user deleted please sign up again  ";
-                                    res.redirect(`/api/user/verified/error=true&message=${message}`)
+                                    res.redirect(`/api/user/verified?error=true&message=${message}`)
                                 })
                                 .catch(error=>{
                                 console.log("error:can't delet user  "+error);
                                     let message= "clearing user with unique string failed ";
-                                    res.redirect(`/api/user/verified/error=true&message=${message}`)
+                                    res.redirect(`/api/user/verified?error=true&message=${message}`)
                             })
                         })
                         .catch((error)=>{
                             console.log(error);
                             let message= "An error occured while clearing expired user verification record ";
-                            res.redirect(`/api/user/verified/error=true&message=${message}`)
+                            res.redirect(`/api/user/verified?error=true&message=${message}`)
                         })
 
                 }else {
@@ -147,38 +148,39 @@ route.get("/verify/:userId/:uniqueString",(req,res)=>{
                                     .then(()=>{
                                         console.log("updated3");
                                         res.sendFile(path.join(__dirname,"../views/verified.html"));
+                                        //res.redirect(`/api/user/verified?id=${userId}`)
                                         console.log("is that her the fucking errror!");
                                     })
                                     .catch(error=>{
                                         let message= "an error occured while updating user to verified";
-                                        res.redirect(`/api/user/verified/error=true&message=${message}`)
+                                        res.redirect(`/api/user/verified?error=true&message=${message}`)
                                     })
                             }else{
                                 let message= "invalid validation of unique string . check your inbox";
-                                res.redirect(`/api/user/verified/error=true&message=${message}`)
+                                res.redirect(`/api/user/verified?error=true&message=${message}`)
                             }
                         })
                         .catch(error=>{
                             let message= "an error occured while comparing the unique string";
-                            res.redirect(`/api/user/verified/error=true&message=${message}`)
+                            res.redirect(`/api/user/verified?error=true&message=${message}`)
                         })
                 }
             }else {
                 let message= "account doesn't exist or has been verified already";
-                res.redirect(`/api/user/verified/error=true&message=${message}`)
+                res.redirect(`/api/user/verified?error=true&message=${message}`)
             }
         })
         .catch(error=>{
             console.log(error)
             let message= "An error occured while checking for existing user";
-            res.redirect(`/api/user/verified/error=true&message=${message}`)
+            res.redirect(`/api/user/verified?error=true&message=${message}`)
 
         });
 })
 
 
 route.get("/verified",(req,res)=>{
-    res.sendFile(path.join(__dirname,"./../views/verified.html"))// the file path of the code html that will shown to the user to verify her account using email
+    res.sendFile(path.join(__dirname,"../views/verified.html"))// the file path of the code html that will shown to the user to verify her account using email
 })
 
 
@@ -216,10 +218,19 @@ User.findOne({email:req.body.email}).then(user=>{
                              {expiresIn: "1h"}
         );
     console.log(token)
-    res.status(201).json({message:"connected !",token:token, id : fetchedUser._id  ,name: fetchedUser.name});
+    res.status(201).json({message:"connected !",token:token, id : fetchedUser._id  ,name: fetchedUser.name,isNew:fetchedUser.isNew});
 }).catch(error=>{
     console.log(error);
     res.status(400).json({message:"somthing went wrong!"})
 })
 })
+
+//--------------------------------------------------------
+route.put("/updated",(req,res,next)=>{
+    const id=req.body.id ;
+    User.updateOne({_id:id},{$set:{isNew:false}}).then(result=>{
+        console.log("res"+result)})
+})
+
+
 module.exports=route;

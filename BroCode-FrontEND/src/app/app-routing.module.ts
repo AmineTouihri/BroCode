@@ -5,13 +5,14 @@ import {LoginComponent} from "./Components/Public/auth/login/login.component";
 import {RegisterComponent} from "./Components/Public/auth/register/register.component";
 import {ProfilComponent} from "./Components/Public/profil/profil.component";
 import { HomeComponent } from './Components/Public/home/home.component';
+import {AuthGuard} from "./guardes/auth.guard";
 
 
 const routes: Routes = [
   {path : "" ,  component : LandingPageComponent},
   {path : "login" ,  component : LoginComponent},
   {path : "register" ,  component : RegisterComponent},
-  {path : "profil" ,  component : ProfilComponent},
+  {path : "profil" ,  component : ProfilComponent,canActivate:[AuthGuard]},
   {path: "home" , component : HomeComponent}
 
 ];
