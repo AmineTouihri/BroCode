@@ -11,7 +11,10 @@ import {authInteractor} from "./Components/Public/auth/auth-Interactor";
 import { NavBarComponent } from './Components/Public/shared/nav-bar/nav-bar.component';
 import {FormsModule} from "@angular/forms";
 import {ProfilComponent}  from "./Components/Public/profil/profil.component";
-import { HomeComponent } from './Components/Public/home/home.component'
+import { HomeComponent } from './Components/Public/home/home.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import {MatDialogModule} from '@angular/material/dialog';
+import { DialogComponent } from './Components/Public/dialog/dialog.component';
 
 
 @NgModule({
@@ -22,7 +25,8 @@ import { HomeComponent } from './Components/Public/home/home.component'
     LandingPageComponent,
     NavBarComponent,
     ProfilComponent,
-    HomeComponent
+    HomeComponent,
+    DialogComponent
 
 
   ],
@@ -30,7 +34,9 @@ import { HomeComponent } from './Components/Public/home/home.component'
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule
 
   ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:authInteractor,multi:true}],
