@@ -5,6 +5,8 @@ const route=express.Router();
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const User=require("../Models/User");
+const multer = require ('multer');
+const checkauth = require('../../middlewares/check-auth')
 //verification model
 const userVerification=require("../Models/UserVerification")
 //email handler
@@ -14,6 +16,27 @@ const {v4:uuidv4}=require("uuid");
 
 const path=require("path");
 
+// multer stuff
+const mime_type_map ={
+    'image/png' : 'png',
+    'image/jpeg' : 'jpg',
+    'image/jpg' : 'jpg'
+ }
+const storage = multer.diskStorage({
+    destination :(req , file, cb)=>{
+        const  isvalid = mime_type_map[file.mimetype]
+        let error = new Error("invalid mime type !") ;
+        if(isvalid){
+            error = null
+        }
+        cb(error, 'images')
+    },
+    filename : (req,file,cb)=>{
+        const name = file.originalname.toLowerCase().split(' ').join('-')
+        const ext = mime_type_map[file.mimetype]
+        cb(null, name + '-' +Date.now() +'.'+ext)
+    }
+})
 
 
 //node mailer stuff
@@ -210,8 +233,9 @@ User.findOne({email:req.body.email}).then(user=>{
     }
     return bcrypt.compare(req.body.password,fetchedUser.password)
 }).then(result=>{
+    console.log(result)
     if(!result){
-        res.status(404).json({message:"faild to connect!"})
+        res.status(404).json({message:"faild to connect here!"})
     }
     const token=jwt.sign({email:fetchedUser.email,userId:fetchedUser._id},
                           "secret_this_should_be_longer",
@@ -226,11 +250,72 @@ User.findOne({email:req.body.email}).then(user=>{
 })
 
 //--------------------------------------------------------
-route.put("/updated",(req,res,next)=>{
-    const id=req.body.id ;
+route.put("/updated",checkauth,(req,res,next)=>{
+    const id= req.userData.userId ;
     User.updateOne({_id:id},{$set:{isNew:false}}).then(result=>{
-        console.log("res"+result)})
+        console.log("status aupdated successfuly")})
+})
+route.put("/upgradeprofile" ,checkauth,(req ,res)=>{
+    const id = req.userData.userId;
+
+    User.updateOne(
+        { _id : id },
+        {
+            $set: { firstname:req.body.firstName,
+                    lastName :req.body.lastName,
+                    name :req.body.name,
+                    birth :req.body.birth,
+                    phone :req.body.phone,
+                    proPhone:req.body.proPhone,
+                    location:req.body.location,
+                    facebook:req.body.facebook,
+                    twitter:req.body.twitter,
+                    github:req.body.github,
+                    linkedin:req.body.linkedin,
+                    bio :req.body.bio,
+            },
+            $currentDate: { lastModified: true }
+        }
+    ).then(res=>{
+        console.log('updated')
+
+    },err=>{
+        console.log(err)
+    })
+
+
 })
 
+route.put("/savelangage",checkauth,(req,res,next)=>{
+    const id = req.userData.userId;
+    const lan = req.body.langage
+    // console.log('sl,dnjsdbn' +lan)
+    // console.log(id)
+    User.updateOne({_id:id},{$set:{langage : lan}}).then(result=>{
+        console.log("res"+result)}).catch(err=>{
+        console.log(err)
+    })
+})
+
+route.get("",checkauth , (req ,res)=>{
+    const id = req.userData.userId;
+    User.findById(id).then(resul=>{
+        res.json(resul)
+    }, err=>{
+        console.log(err)
+    })
+})
+
+route.put("/changephoto" ,checkauth,multer({storage : storage}).single('image'), (req ,res)=>{
+    const url = req.protocol+'://'+req.get('host') ;
+    console.log(url)
+    const id = req.userData.userId;
+    const imagepath = url + '/images/'+req.file.filename;
+    console.log(imagepath)
+    User.updateOne({_id:id},{$set:{imagepath : imagepath}}).then(result=>{
+        console.log("res"+result)}).catch(err=>{
+        console.log('ici c l erreure'+err)
+    })
+})
 
 module.exports=route;

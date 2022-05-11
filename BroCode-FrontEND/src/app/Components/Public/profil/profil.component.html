@@ -4,22 +4,22 @@
       ; border-radius: 20px ;">
       <div class="rounded-full bg-white md:w-[180px] md:h-[180px] sm:w-[100px] sm:h-[100px] w-[70px] :h-[70px]  absolute top-[-90px] left-[10%]" style="display: flex; justify-content: center ;
       align-items: center ; box-shadow: 2px 2px 6px gray ;" >
-        <div  class="edit_img_btn hover:cursor-pointer"style="position: absolute; width: 25px; height: 25px; background-color: white;top: 80% ;right: 26px
+        <div (click)="changePhoto()" class="edit_img_btn hover:cursor-pointer"style="position: absolute; width: 25px; height: 25px; background-color: white;top: 80% ;right: 26px
         ;display: flex ;justify-content: center ;align-items: center ;border-radius: 3px; box-shadow: 2px 2px 6px gray ;">
 
           <i class="fas fa-pen"></i>
         </div>
-        <img src="../../../../assets/images/user.png" alt="s," style="width: 95% ; height: 95% ; border-radius: 50%">
+        <img [src]="img" alt="s," style="width: 95% ; height: 95% ; border-radius: 50%">
       </div>
       <header class="" style="  ; border-radius: 20px 20px 0 0  ; border-bottom: 1px solid lightgray ;  padding: 1rem;display: flex; justify-content: flex-end;
 width: 100%;">
         <div style="width: 60%;display: flex;flex-direction: column; gap: .5rem">
-          <p style=" font-size: x-large; font-weight: 550; color: #0c2461;font-family:  'Baloo 2', cursive ;">hazem bens aria</p>
-          <p style="font-weight: 500 ;color : gray;">sdknbfjskdfjsdnk</p>
+          <p style=" font-size: x-large; font-weight: 550; color: #0c2461;font-family:  'Baloo 2', cursive ;">{{user.name}}</p>
+          <p style="font-weight: 500 ;color : gray;">{{user.bio}}</p>
           <div>
-            <p style="font-family:  'Baloo 2', cursive ;color: rgb(190, 188, 188); margin-right: 4rem;  display: inline; " ><i style="margin-right: 4px;" class="fab fa-linkedin"></i> lkdncjsdb</p>
-            <p style="font-family:  'Baloo 2', cursive ;color: rgb(190, 188, 188); margin-right: 4rem; display: inline; " ><i  style="margin-right: 4px;" class="fab fa-facebook-f"></i> kjdhjqd</p>
-            <p style="font-family:  'Baloo 2', cursive ;color: rgb(190, 188, 188); margin-right: 4rem;  display: inline; " ><i style="margin-right: 4px;" class="fab fa-twitter"></i> jebd</p>
+            <p style="font-family:  'Baloo 2', cursive ;color: rgb(190, 188, 188); margin-right: 4rem;  display: inline; " ><i style="margin-right: 4px;" class="fab fa-linkedin"></i> {{user.linkedin}}</p>
+            <p style="font-family:  'Baloo 2', cursive ;color: rgb(190, 188, 188); margin-right: 4rem; display: inline; " ><i  style="margin-right: 4px;" class="fab fa-facebook-f"></i> {{user.facebook}}</p>
+            <p style="font-family:  'Baloo 2', cursive ;color: rgb(190, 188, 188); margin-right: 4rem;  display: inline; " ><i style="margin-right: 4px;" class="fab fa-twitter"></i> {{user.twitter}}</p>
           </div>
         </div>
         <input (click)="updateProfil()" class="hover:cursor-pointer" type="button" value="upgrade profil" style="align-self: flex-end ;border: 2px red solid ;border-radius: 20px ;padding: .1rem .5rem ;font-size: small ; background-color:red; color: white ">
@@ -31,10 +31,10 @@ width: 100%;">
           <div>
 
 
-            <p style="font-family:  'Baloo 2', cursive ;color:  #0c2461; font-size: large ;font-weight: 500;" ><i style="margin-right: 5px;" class="fas fa-envelope"></i>hazem@gmail.com</p>
-            <p style="font-family:  'Baloo 2', cursive ;color: gray; " ><i style="margin-right: 5px;"  class="fas fa-phone-alt"></i> (Mobile) 58796557</p>
-            <p style="font-family:  'Baloo 2', cursive ;color: gray; margin-left: 22px;" >  (Office)</p>
-            <p style="font-family:  'Baloo 2', cursive ;color: gray; " ><i style="margin-right: 5px;"  class="fas fa-map-marker-alt"></i> location</p>
+            <p style="font-family:  'Baloo 2', cursive ;color:  #0c2461; font-size: large ;font-weight: 500;" ><i style="margin-right: 5px;" class="fas fa-envelope"></i>{{user.email}}</p>
+            <p style="font-family:  'Baloo 2', cursive ;color: gray; " ><i style="margin-right: 5px;"  class="fas fa-phone-alt"></i> (Mobile) {{user.phone}}</p>
+            <p style="font-family:  'Baloo 2', cursive ;color: gray; margin-left: 22px;" >  (Office) {{user.proPhone}}</p>
+            <p style="font-family:  'Baloo 2', cursive ;color: gray; " ><i style="margin-right: 5px;"  class="fas fa-map-marker-alt"></i> {{user.location}}</p>
           </div>
 
 

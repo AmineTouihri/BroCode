@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../../../Services/auth.service";
+import {AuthServic} from "../../../../Services/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class NavBarComponent implements OnInit {
 
-  constructor(private authservice  : AuthService,  private router : Router) { }
+  constructor(private authservice  : AuthServic,  private router : Router) { }
 isconnected =false ;
   ngOnInit(): void {
     this.isconnected =this.authservice.getIsLogedNow()
