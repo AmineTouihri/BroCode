@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from "@angular/forms";
-import {AuthService} from "../../../../Services/auth.service";
+import {AuthServic} from "../../../../Services/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -9,7 +9,7 @@ import {AuthService} from "../../../../Services/auth.service";
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private  authService:AuthService) { }
+  constructor(private  authService:AuthServic) { }
   onSubmit(myForm:NgForm){
     const user={
       email:myForm.value.email,

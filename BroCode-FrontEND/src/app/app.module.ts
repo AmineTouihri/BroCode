@@ -9,37 +9,43 @@ import { LandingPageComponent} from "./Components/Public/landing-page/landing-pa
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {authInteractor} from "./Components/Public/auth/auth-Interactor";
 import { NavBarComponent } from './Components/Public/shared/nav-bar/nav-bar.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {ProfilComponent}  from "./Components/Public/profil/profil.component";
 import { HomeComponent } from './Components/Public/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import {MatDialogModule} from '@angular/material/dialog';
-import { DialogComponent } from './Components/Public/dialog/dialog.component';
-
+import { DialogComponent } from "./Components/Public/dialoge/upgrad-profil-dialog/dialog.component";
+import { SelectLangugesComponent } from './Components/Public/dialoge/select-languges/select-languges.component';
+import { PhotoDialogComponent } from './Components/Public/dialoge/photo-dialog/photo-dialog.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+  AppComponent,
     LoginComponent,
     RegisterComponent,
     LandingPageComponent,
     NavBarComponent,
     ProfilComponent,
     HomeComponent,
-    DialogComponent
+    DialogComponent,
+    SelectLangugesComponent,
+    PhotoDialogComponent
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    MatDialogModule
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        HttpClientModule,
+        BrowserAnimationsModule,
+        MatDialogModule,
+        ReactiveFormsModule,
 
+
+    ],
+  providers: [{provide:HTTP_INTERCEPTORS,useClass:authInteractor,multi:true}
   ],
-  providers: [{provide:HTTP_INTERCEPTORS,useClass:authInteractor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

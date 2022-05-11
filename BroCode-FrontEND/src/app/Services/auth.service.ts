@@ -3,41 +3,42 @@ import {authModel} from "../Models/auth-Model";
 import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs";
 import {Router} from "@angular/router";
+import {FormGroup, NgForm} from "@angular/forms";
+
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthServic {
   private authListner=new Subject<boolean>();//bch na3rfou bih est ce que fama user mconecti bch ndesplayi 7ajet fel header w fazet
 private token!:string;
 private islogednow =false ;
+private user : any
+  private userId ! : string
 
+  constructor(private http:HttpClient ,  private router :Router ) {
 
-public  getToken(){
-  return this.token;
+  }
+
+getUserId(){
+  return this.userId ;
 }
-public getAuthListner(){
-  return this.authListner;
-}
-  constructor(private http:HttpClient ,  private router :Router ) { }
 
   //------------------------login---------------------------------
   loginUser(email:string,password:string){
 const auth:authModel={email:email,password:password}
 
     this.http.post<{token:string, id:string , name:string,isNew:boolean}>('http://localhost:8000/api/user/login',auth).subscribe(result=>{
-      console.log(result)
       if(result.token){
-
-        this.saveAuthData(result.token , result.id)
+      this.user = result ;
+        this.saveAuthData(result.token )
         this.islogednow =true ;
+        this.userId= result.id
         this.token=result.token;
         this.authListner.next(true);
         if(result.isNew){
 
           this.router.navigate(["/profil"])
-          this.http.put('http://localhost:8000/api/user/updated',{result:true,id:result.id}).subscribe(()=>{
-            console.log("updated")});
         }
         else
         this.router.navigate(['home'])
@@ -56,18 +57,60 @@ const auth:authModel={email:email,password:password}
 
     })
   }
+
+  saveLangage(langages:[]){
+    console.log(langages)
+    this.http.put('http://localhost:8000/api/user/savelangage',{langage : langages}).subscribe(result=>{
+      console.log(result);
+
+
+    })
+
+  }
+  upgradeProfile(myForm:NgForm){
+
+    const user ={
+      bio : myForm.form.value.bio ,
+      firstName : myForm.form.value.firstName ,
+      lastName : myForm.form.value.lastName ,
+      email : myForm.form.value.email,
+      name : myForm.form.value.userName ,
+      birth : myForm.form.value.birth ,
+      phone : myForm.form.value.phone,
+      proPhone : myForm.form.value.proPhone ,
+      location : myForm.form.value.location ,
+      facebook : myForm.form.value.facebook ,
+      twitter : myForm.form.value.twitter ,
+      linkedin:  myForm.form.value.linkedin ,
+      github : myForm.form.value.github,
+    }
+    console.log(user)
+    this.http.put<{msg :string}>('http://localhost:8000/api/user/upgradeprofile',user).subscribe(result=>{
+      console.log(result);
+
+
+    })
+
+  }
+  getUser(){
+
+    return this.http.get<{_id :string , firstname : string , lastname : string , email : string , phone : string , proPhone : string , location : string , linkedin : string , facebook : string , twitter : string , bio : string, github :string , birth : string , isNew: boolean , imagepath : string  } >('http://localhost:8000/api/user/')
+
+  }
+  getcurrentUser(){
+  return this.user  ;
+  }
   getIsLogedNow(){
   return this.islogednow ;
   }
   // --------------------------------saving data in local storage ----------------------------
-  private saveAuthData(token :string , userId : string ){
-    localStorage.setItem("userId" ,userId)
+  private saveAuthData(token :string  ){
     localStorage.setItem("token" ,token)
   }
 // ------------------------------------removing data from local storage---------------------------------
   private clearAuthData(){
-    localStorage.removeItem("userId" )
     localStorage.removeItem("token")
+    localStorage.removeItem("isnew")
   }
   logout(){
 
@@ -93,5 +136,20 @@ const auth:authModel={email:email,password:password}
     return token
   }
 
+  public  getToken(){
+    return this.token;
+  }
+  public getAuthListner(){
+    return this.authListner;
+  }
 
+  changeimage(form :FormGroup ){
+    const userdata = new FormData()
+    userdata.append('image' ,form.value.imagepath , "hazem")
+    console .log(userdata)
+    console .log(userdata.get('image'))
+    this.http.put('http://localhost:8000/api/user/changephoto',userdata).subscribe(reslt=>{
+      console.log(reslt)
+    })
+}
 }
