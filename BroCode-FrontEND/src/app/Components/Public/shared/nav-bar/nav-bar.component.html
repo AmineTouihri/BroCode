@@ -1,4 +1,4 @@
-<div class="navbar bg-amber-400">
+<div class="navbar bg-blue-100" style="color: #0c2461">
   <div class="container">
     <div id="logo" class="hover:cursor-pointer " routerLink="/">BroCode</div>
     <div class="items">
@@ -7,7 +7,10 @@
       <div *ngIf="isconnected"   class="item" routerLink="/home">jobs</div>
       <div *ngIf="isconnected" class="item" routerLink="/home">bugs</div>
       <div *ngIf="!isconnected" class="item" routerLink="/login">log in</div>
-      <div *ngIf="isconnected" class="item" routerLink="/profil">profil</div>
+      <div *ngIf="isconnected" class="item" routerLink="/profil" style="display: flex ;justify-content: space-between ;  align-items: center ;gap: 10px;  background-color: rgba(255,255,255,0.7); border-radius: 22px ; padding: 5px 15px 5px 5px ">
+        <img [src]="user.imagepath" alt="" style="width: 30px ; height: 30px ; border-radius: 50%" >
+        <div>{{user.firstname}}</div>
+      </div>
       <div *ngIf="isconnected" class="item" (click)="onlogout()">log out</div>
 
       <div *ngIf="!isconnected" class="item" routerLink="/register" style="background-color: #15ccbe; width: 6em ; height: 2em; display: flex ;
