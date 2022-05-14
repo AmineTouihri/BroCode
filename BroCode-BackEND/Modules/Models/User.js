@@ -20,7 +20,8 @@ const userSchema=mongosse.Schema({
     linkedin :  String ,
     bio :String ,
     date: { type: Date, default: Date.now },
-    imagepath: String
+    imagepath: String,
+    following :[]
 
 })
 userSchema.plugin(UniqueValidator);

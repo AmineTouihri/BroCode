@@ -1,19 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthServic} from "../../../../Services/auth.service";
 import {Router} from "@angular/router";
-
+import {LikeService} from "../../../../Services/like.service";
+import * as dayjs from 'dayjs'
+import {PostService} from "../../../../Services/post.service";
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-
-  constructor(private authservice  : AuthServic,  private router : Router) { }
+user :any
+  constructor(private authservice  : AuthServic,  private router : Router ) { }
 isconnected =false ;
   ngOnInit(): void {
     this.isconnected =this.authservice.getIsLogedNow()
-    console.log(this.isconnected)
+    if (this.isconnected) {
+      this.authservice.getUser().subscribe(user => {
+        this.user = user;
+      })
+    }
+
+
+
+
   }
 
 

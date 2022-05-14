@@ -17,6 +17,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { DialogComponent } from "./Components/Public/dialoge/upgrad-profil-dialog/dialog.component";
 import { SelectLangugesComponent } from './Components/Public/dialoge/select-languges/select-languges.component';
 import { PhotoDialogComponent } from './Components/Public/dialoge/photo-dialog/photo-dialog.component';
+import {AddPostDialogComponent} from "./Components/Public/dialoge/add-post-dialog/add-post-dialog.component";
+import { OtherProfilComponent } from './Components/Public/other-profil/other-profil.component';
+
 
 @NgModule({
   declarations: [
@@ -29,7 +32,9 @@ import { PhotoDialogComponent } from './Components/Public/dialoge/photo-dialog/p
     HomeComponent,
     DialogComponent,
     SelectLangugesComponent,
-    PhotoDialogComponent
+    PhotoDialogComponent,
+    AddPostDialogComponent,
+    OtherProfilComponent
 
 
   ],

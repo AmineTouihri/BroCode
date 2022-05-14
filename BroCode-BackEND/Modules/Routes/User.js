@@ -239,7 +239,7 @@ User.findOne({email:req.body.email}).then(user=>{
     }
     const token=jwt.sign({email:fetchedUser.email,userId:fetchedUser._id},
                           "secret_this_should_be_longer",
-                             {expiresIn: "1h"}
+                             {expiresIn: "9h"}
         );
     console.log(token)
     res.status(201).json({message:"connected !",token:token, id : fetchedUser._id  ,name: fetchedUser.name,isNew:fetchedUser.isNew});
@@ -317,5 +317,30 @@ route.put("/changephoto" ,checkauth,multer({storage : storage}).single('image'),
         console.log('ici c l erreure'+err)
     })
 })
+route.get("/visitor/:id", (req,res)=>{
+    const id = req.params.id
+    User.findById(id).then(visitor=>{
+        console.log('visitor'+visitor)
+        res.status(200).json(visitor)
+    },err=>{
+        console.log(err)
+    })
+})
+route.post("/followVisitor" ,checkauth,(req,res)=>{
+    console.log(req.body.id)
+    User.updateOne({_id :req.userData.userId }, {$push:{following :req.body.id}}).then(res=>{
+        console.log('following upadated !')
+    },err=>{
+        console.log(err)
+    })
 
+})
+route.post("/getfollowing" , checkauth ,(req ,res)=>{
+    console.log(req.body.following)
+    User.find({_id:{$in : req.body.following}}).then(following=>{
+        res.status(200).json(following)
+    },err=>{
+        console.log(err)
+    })
+})
 module.exports=route;

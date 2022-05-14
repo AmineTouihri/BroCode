@@ -6,6 +6,7 @@ import {RegisterComponent} from "./Components/Public/auth/register/register.comp
 import {ProfilComponent} from "./Components/Public/profil/profil.component";
 import { HomeComponent } from './Components/Public/home/home.component';
 import {AuthGuard} from "./guardes/auth.guard";
+import {OtherProfilComponent} from "./Components/Public/other-profil/other-profil.component";
 
 
 const routes: Routes = [
@@ -13,7 +14,8 @@ const routes: Routes = [
   {path : "login" ,  component : LoginComponent},
   {path : "register" ,  component : RegisterComponent},
   {path : "profil" ,  component : ProfilComponent,canActivate:[AuthGuard]},
-  {path: "home" , component : HomeComponent}
+  {path: "home" , component : HomeComponent},
+  {path: "otherProfil/:id" , component : OtherProfilComponent}
 
 ];
 

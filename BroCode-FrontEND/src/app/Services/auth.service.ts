@@ -146,10 +146,29 @@ const auth:authModel={email:email,password:password}
   changeimage(form :FormGroup ){
     const userdata = new FormData()
     userdata.append('image' ,form.value.imagepath , "hazem")
-    console .log(userdata)
-    console .log(userdata.get('image'))
     this.http.put('http://localhost:8000/api/user/changephoto',userdata).subscribe(reslt=>{
       console.log(reslt)
     })
+}
+getVisitor(id :string){
+  return this.http.get<{_id :string , firstname : string , lastname : string , email : string , phone : string , proPhone : string , location : string , linkedin : string , facebook : string , twitter : string , bio : string, github :string , birth : string , isNew: boolean , imagepath : string  } >('http://localhost:8000/api/user/visitor/'+id)
+
+}
+
+folowVisitor(idVisitor :string){
+
+const obj={
+  id :idVisitor
+  }
+  this.http.post('http://localhost:8000/api/user/followVisitor', obj).subscribe(reslt=>{
+    console.log(reslt)
+  })
+}
+getFollowing(following: any){
+  const obj = {
+    following :following
+  }
+ return  this.http.post('http://localhost:8000/api/user/getfollowing', obj)
+
 }
 }
