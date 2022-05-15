@@ -12,7 +12,7 @@ import {PostService} from "../../../../Services/post.service";
 export class NavBarComponent implements OnInit {
 user :any
   color ! :string
-  colors =['blue' ,'red']
+  colors =['blue' ,'red', 'white']
   constructor(private authservice  : AuthServic,  private router : Router ) { }
 isconnected =false ;
   ngOnInit(): void {
