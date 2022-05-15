@@ -19,6 +19,9 @@ import { SelectLangugesComponent } from './Components/Public/dialoge/select-lang
 import { PhotoDialogComponent } from './Components/Public/dialoge/photo-dialog/photo-dialog.component';
 import {AddPostDialogComponent} from "./Components/Public/dialoge/add-post-dialog/add-post-dialog.component";
 import { OtherProfilComponent } from './Components/Public/other-profil/other-profil.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
+import { JobsComponent } from './Components/Public/jobs/jobs.component';
 
 
 @NgModule({
@@ -34,7 +37,8 @@ import { OtherProfilComponent } from './Components/Public/other-profil/other-pro
     SelectLangugesComponent,
     PhotoDialogComponent,
     AddPostDialogComponent,
-    OtherProfilComponent
+    OtherProfilComponent,
+    JobsComponent
 
 
   ],
@@ -46,6 +50,8 @@ import { OtherProfilComponent } from './Components/Public/other-profil/other-pro
         BrowserAnimationsModule,
         MatDialogModule,
         ReactiveFormsModule,
+        MatMenuModule,
+        MatIconModule
 
 
     ],

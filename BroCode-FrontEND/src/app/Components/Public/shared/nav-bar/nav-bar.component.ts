@@ -11,6 +11,8 @@ import {PostService} from "../../../../Services/post.service";
 })
 export class NavBarComponent implements OnInit {
 user :any
+  color ! :string
+  colors =['blue' ,'red', 'white']
   constructor(private authservice  : AuthServic,  private router : Router ) { }
 isconnected =false ;
   ngOnInit(): void {
@@ -20,16 +22,12 @@ isconnected =false ;
         this.user = user;
       })
     }
-
-
-
-
   }
-
-
   onlogout(){
     this.authservice.logout()
     this.router.navigate(['login'])
   }
-
+  chooseColor(color :string){
+    this.color = color
+  }
 }

@@ -3,9 +3,11 @@
   width: 100%;
 }
 .freinds{
-  width: 25%;
-  background-color: gainsboro;
+  width: 22%;
+  /*border-right: 1px lightgray solid;*/
+/*box-shadow: 2px 2px 10px lightgray;*/
   display: flex ;
+  /*background-color: #f8f8f8;*/
   flex-direction: column ;
   padding :1rem ;
 
@@ -17,11 +19,11 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  width: 56%;
 }
 .ads{
 
-  width: 25%;
+  width: 22%;
 
 }
 .creatPost{
@@ -32,7 +34,7 @@
   align-items: center;
   width: 80%;
   height: 6rem;
-  background-color: rgba(10, 185, 180,.3);
+  background: linear-gradient(18deg, rgba(2,0,36,1) 0%, rgba(0,145,194,1) 0%, rgba(5,96,150,1) 27%, rgba(12,36,97,1) 77%);
   color :#00393e;
   font-weight: 500;
 }
@@ -153,3 +155,92 @@ display: flex;
 #fullname:hover{
   cursor: pointer;
 }
+ /*for the search ber*/
+
+.flexbox {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding: 0;
+  border-radius: 10px;
+
+}
+.search {
+  margin: 20px;
+}
+
+.search > div {
+  display: inline-block;
+  position: relative;
+  filter: drop-shadow(0 1px #0091c2);
+}
+
+.search > div:after {
+  content: "";
+  background: #0c2461;;
+  width: 4px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  right: -7px;
+  transform: rotate(125deg);
+}
+.search > h3 {
+  font-weight: normal;
+}
+
+.search > h1,
+.search > h3 {
+  color: white;
+  margin-bottom: 15px;
+  text-shadow: 0 1px #0091c2;
+}
+
+.search > div > input {
+  color: #0c2461;
+  font-size: 16px;
+  background: transparent;
+  width: 35px;
+  height: 35px;
+  padding: 10px;
+  border: solid 3px #0c2461;;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+
+}
+.search > div > input:hover{
+  cursor: pointer;
+}
+.search > div > input::placeholder {
+  color: #0c2461;;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.search > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search > div > input:focus,
+.search > div > input:not(:placeholder-shown) {
+  width: 250px;
+}
+/*end of css of search bar*/
+#follow{
+  width: 90%;
+  padding: .5rem;
+  border-radius: 7px;
+  position:absolute;
+  height: 3rem;
+  color :  #0c2461;
+}
+#follow:hover{
+
+  cursor: pointer;
+  transition: all ease-in-out .3s;
+}
+
+

@@ -1,18 +1,36 @@
 
     <app-nav-bar></app-nav-bar>
 <div class="father">
-  <div class="freinds  " >
-<ng-container *ngFor="let follow of following"  >
-  <div style="display: flex ;align-items: center ;gap: 1rem ;margin-bottom: 1rem;" class="backdrop-blur bg-white">
-    <img [src]="follow.imagepath" alt="" style="width: 30px ;height: 30px; border-radius: 50%">
-    <div>{{follow.name}}</div>
-  </div>
+  <div class="freinds bg-blue-50 "style="position: fixed; top: 5rem ;left: 0 ;bottom: 0" >
+<!--     search bar-->
 
+    <div class="flexbox backdrop backdrop-blur" >
+      <div class="search">
+        <div>
+          <input type="text" placeholder="Search Contact . . ." required>
+        </div>
+      </div>
+    </div>
+<!--    end of search bar -->
 
-</ng-container>
+    <hr style="margin-bottom: 1rem;">
+    <div class="following" style=" height: 20rem;">
+      <p style="font-weight: 500 ;font-size: large; color:  #0c2461;">following</p>
+      <ng-container *ngFor="let follow of following"  >
+        <div  style=" display: flex ;align-items: center ;gap: 1rem ;margin-bottom: 1rem;" id="follow" (click)="visitProfil(follow._id)" class="hover:bg-blue-100">
+          <img [src]="follow.imagepath" alt="" style="width: 35px ;height: 35px; border-radius: 50%">
+          <div style="font-size: large ; font-weight: 400">{{follow.name}}</div>
+        </div>
+      </ng-container>
+    </div>
+    <hr  style="margin-bottom: 1rem;">
+    <div class="sugetions">
+      <p style="font-weight: 500 ;font-size: large; color: #0c2461;">sugestions</p>
+    </div>
+
   </div>
 <!--    ------------------------------ main section-----------------------------------  -->
-  <div class="main">
+  <div class="main" style="margin-left: 22rem; margin-top: 5rem;">
     <section class="creatPost"  *ngIf="isconnected" (click)="onAddPost()" >
         <header id="idee-header">
           <img style="width: 45px;height: 45px;border-radius:50%" [src]="user.imagepath" alt="">
@@ -30,7 +48,19 @@
             <p id="fullname" style="margin-bottom: 0px;font-size: larger; font-weight: 500;" (click)="visitProfil(post.id)">{{post.fname}} {{post.lname}}</p>
             <p id="date" [attr.fulldate]="post.fulldate" style="margin-top: 0px; font-size: x-small;color: gray;">{{post.date}}<i style="margin-left: 5px;" class="fal fa-alarm-clock"></i></p>
           </div>
-
+<!--          menu -->
+          <div class="menu" style="margin-left: 63%">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon><i class="far fa-ellipsis-h"></i></mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item style="color:#0c2461">
+                <mat-icon><i style="color: red"  class="fal fa-exclamation-triangle"></i></mat-icon>
+                <span>signal</span>
+              </button>
+            </mat-menu>
+          </div>
+<!--          end of menu -->
         </header>
 
         <img   style="width: 100%; height: 60%; " [src]="post.img" alt="szdf">
