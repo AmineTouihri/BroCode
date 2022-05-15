@@ -9,6 +9,10 @@ import * as dayjs from "dayjs";
 import {DialogComponent} from "../dialoge/upgrad-profil-dialog/dialog.component";
 import {Router} from "@angular/router";
 
+/**
+ * @title Menu with icons
+ */
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
