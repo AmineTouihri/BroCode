@@ -5,6 +5,7 @@ const route=express.Router();
 const bcrypt=require("bcrypt");
 const jwt=require("jsonwebtoken");
 const User=require("../Models/User");
+const Post=require("../Models/post");
 const multer = require ('multer');
 const checkauth = require('../../middlewares/check-auth')
 //verification model
@@ -312,6 +313,8 @@ route.put("/changephoto" ,checkauth,multer({storage : storage}).single('image'),
     const id = req.userData.userId;
     const imagepath = url + '/images/'+req.file.filename;
     console.log(imagepath)
+    Post.updateMany({userId:id} ,{$set:{userimage : imagepath}}).then(_=>{
+        console.log('picts updates')})
     User.updateOne({_id:id},{$set:{imagepath : imagepath}}).then(result=>{
         console.log("res"+result)}).catch(err=>{
         console.log('ici c l erreure'+err)

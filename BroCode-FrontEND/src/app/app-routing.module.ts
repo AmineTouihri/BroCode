@@ -7,6 +7,9 @@ import {ProfilComponent} from "./Components/Public/profil/profil.component";
 import { HomeComponent } from './Components/Public/home/home.component';
 import {AuthGuard} from "./guardes/auth.guard";
 import {OtherProfilComponent} from "./Components/Public/other-profil/other-profil.component";
+import {JobsComponent} from "./Components/Public/jobs/jobs.component";
+import {SinglePostComponent} from "./Components/Public/single-post/single-post.component";
+import {BugsComponent} from "./Components/Public/bugs/bugs.component";
 
 
 const routes: Routes = [
@@ -15,7 +18,10 @@ const routes: Routes = [
   {path : "register" ,  component : RegisterComponent},
   {path : "profil" ,  component : ProfilComponent,canActivate:[AuthGuard]},
   {path: "home" , component : HomeComponent},
-  {path: "otherProfil/:id" , component : OtherProfilComponent}
+  {path: "otherProfil/:id" , component : OtherProfilComponent},
+  {path: "jobs" , component : JobsComponent ,canActivate:[AuthGuard]},
+  {path: "post/:id/:poster" , component : SinglePostComponent},
+  {path: "bugs" , component :BugsComponent ,canActivate:[AuthGuard] }
 
 ];
 

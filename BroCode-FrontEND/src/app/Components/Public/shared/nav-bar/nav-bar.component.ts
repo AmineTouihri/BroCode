@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {LikeService} from "../../../../Services/like.service";
 import * as dayjs from 'dayjs'
 import {PostService} from "../../../../Services/post.service";
+import {Subject} from "rxjs";
 @Component({
   selector: 'app-nav-bar',
   templateUrl: './nav-bar.component.html',
@@ -11,9 +12,11 @@ import {PostService} from "../../../../Services/post.service";
 })
 export class NavBarComponent implements OnInit {
 user :any
+  filter :string =""
+  t = new Subject<string>().next(this.filter)
   color ! :string
   colors =['blue' ,'red', 'white']
-  constructor(private authservice  : AuthServic,  private router : Router ) { }
+  constructor(private authservice  : AuthServic,  private router : Router ,private postservice :PostService) { }
 isconnected =false ;
   ngOnInit(): void {
     this.isconnected =this.authservice.getIsLogedNow()
@@ -30,4 +33,5 @@ isconnected =false ;
   chooseColor(color :string){
     this.color = color
   }
+
 }

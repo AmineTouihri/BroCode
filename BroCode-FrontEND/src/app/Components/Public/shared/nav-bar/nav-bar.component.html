@@ -7,7 +7,7 @@
     <div class="flexbox backdrop backdrop-blur" >
       <div class="search">
         <div>
-          <input type="text" placeholder="Search Contact . . ." required>
+          <input type="text" placeholder="Search Contact . . ." [(ngModel)]="filter" >
         </div>
       </div>
     </div>
@@ -16,8 +16,8 @@
 
       <div class="item" routerLink="/home">home</div>
       <div class="item">about</div>
-      <div *ngIf="isconnected"   class="item" routerLink="/home">jobs</div>
-      <div *ngIf="isconnected" class="item" routerLink="/home">bugs</div>
+      <div *ngIf="isconnected"   class="item" routerLink="/jobs">jobs</div>
+      <div *ngIf="isconnected" class="item" routerLink="/bugs">bugs</div>
       <div *ngIf="!isconnected" class="item" routerLink="/login">log in </div>
       <div *ngIf="isconnected" class="item" routerLink="/profil" style="display: flex ;justify-content: space-between ;  align-items: center ;gap: 10px;  background-color: rgba(255,255,255,0.7); border-radius: 22px ; padding: 5px 15px 5px 5px ">
         <img [src]="user.imagepath" alt="" style="width: 30px ; height: 30px ; border-radius: 50%" >

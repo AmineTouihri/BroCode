@@ -10,6 +10,9 @@ import {FormGroup, NgForm} from "@angular/forms";
   providedIn: 'root'
 })
 export class PostService {
+
+  filter !:string
+  f = new Subject<string>().subscribe()
   constructor( private http : HttpClient) {}
 
   addPost(form : FormGroup ,fname :string ,lname :  string , userimage : string){
@@ -26,6 +29,13 @@ export class PostService {
   }
   getPosts(){
    return  this.http.get<[{_id :string , imagepath: string, content :string , categori :string , date :Date ,userimage :string ,lname :string ,fname :string ,userId :string}]>('http://localhost:8000/api/post')
+
+  }
+  getPost(id : string){
+    const obj={
+      id :id
+    }
+    return  this.http.post<{_id :string , imagepath: string, content :string , categori :string , date :Date ,userimage :string ,lname :string ,fname :string ,userId :string}>('http://localhost:8000/api/post/getPost', obj)
 
   }
 
@@ -51,6 +61,15 @@ export class PostService {
 
     return this.http.get< [{_id :string , idpost: string  , iduser : string , date : Date}] >
     ('http://localhost:8000/api/post/getreadlater/')
+  }
+
+  turnOffComments(idpost :string){
+    const obj ={
+      id :idpost
+    }
+    this.http.post('http://localhost:8000/api/post/turnOffComments' ,obj).subscribe(res=>{
+      console.log(res)
+    })
   }
 }
 
