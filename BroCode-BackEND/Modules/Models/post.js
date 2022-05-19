@@ -8,6 +8,7 @@ const postSchema=mongosse.Schema({
     userimage:String,
     imagepath: String,
     categori : String ,
+    comments :{ type: Boolean, default: true },
     date: { type: Date, default: Date.now },
 
 })

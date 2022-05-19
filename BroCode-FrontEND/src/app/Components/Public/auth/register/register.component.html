@@ -1,9 +1,11 @@
+
+<app-nav-bar></app-nav-bar>
 <div class="father">
   <!--  begin navbar-->
-  <app-nav-bar></app-nav-bar>
+
   <!--  end navbar -->
-  <form (submit)="onSubmit(myForm)" #myForm="ngForm">
-    <div style="width: 100%">
+  <form (submit)="onSubmit(myForm)" #myForm="ngForm" >
+    <div style="width: 100% ">
       <label > email</label><br>
       <input type="email" placeholder="enter your mail" name="email" ngModel required #email="ngModel" email>
     </div>

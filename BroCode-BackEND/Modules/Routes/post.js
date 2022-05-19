@@ -5,6 +5,7 @@ const multer = require ('multer');
 const checkauth = require('../../middlewares/check-auth')
 const Post = require("../Models/post");
 const readLater = require("../Models/readLater");
+const Comment = require("../Models/comment");
 const mime_type_map ={
     'image/png' : 'png',
     'image/jpeg' : 'jpg',
@@ -97,5 +98,18 @@ route.get('/getreadlater',checkauth,(req, res , next )=>{
         err=>{
             console.log(err)
         })
+})
+route.post("/getPost" ,(req,res)=>{
+    Post.findById(req.body.id).then(post=>{
+        res.status(200).json(post)
+    },err=>{
+        console.log(err)
+    })
+})
+
+route.post('/turnOffComments', checkauth,(req ,res)=>{
+
+    Post.updateOne({_id: req.body.id},{$set:{comments:false}}).then(result=>{
+        console.log("status aupdated successfuly")})
 })
 module.exports=route;

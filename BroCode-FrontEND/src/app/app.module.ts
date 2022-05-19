@@ -22,7 +22,13 @@ import { OtherProfilComponent } from './Components/Public/other-profil/other-pro
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
 import { JobsComponent } from './Components/Public/jobs/jobs.component';
-
+import { SinglePostComponent } from './Components/Public/single-post/single-post.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatBadgeModule} from '@angular/material/badge';
+import { JobDialogComponent } from './Components/Public/dialoge/job-dialog/job-dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from "@angular/material/select";
+import { BugsComponent } from './Components/Public/bugs/bugs.component';
 
 @NgModule({
   declarations: [
@@ -38,23 +44,30 @@ import { JobsComponent } from './Components/Public/jobs/jobs.component';
     PhotoDialogComponent,
     AddPostDialogComponent,
     OtherProfilComponent,
-    JobsComponent
+    JobsComponent,
+    SinglePostComponent,
+    JobDialogComponent,
+    BugsComponent
 
 
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        HttpClientModule,
-        BrowserAnimationsModule,
-        MatDialogModule,
-        ReactiveFormsModule,
-        MatMenuModule,
-        MatIconModule
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatMenuModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatBadgeModule,
+    MatFormFieldModule,
+    MatSelectModule
 
 
-    ],
+  ],
   providers: [{provide:HTTP_INTERCEPTORS,useClass:authInteractor,multi:true}
   ],
   bootstrap: [AppComponent]

@@ -8,6 +8,9 @@ import {LikeService} from "../../../Services/like.service";
 import * as dayjs from "dayjs";
 import {DialogComponent} from "../dialoge/upgrad-profil-dialog/dialog.component";
 import {Router} from "@angular/router";
+import {CommentService} from "../../../Services/comment.service";
+import {JobService} from "../../../Services/job.service";
+import {Subject} from "rxjs";
 
 /**
  * @title Menu with icons
@@ -20,10 +23,11 @@ import {Router} from "@angular/router";
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private router : Router,private authservice : AuthServic, public dialog: MatDialog , private postservice : PostService , private likeservice :LikeService) { }
+  constructor(private jobservice :JobService, private router : Router,private authservice : AuthServic, public dialog: MatDialog , private postservice : PostService , private likeservice :LikeService ,private commentService :CommentService) { }
 user :any
   isconnected =false
   posts  :any =[]
+  jobs :any =[]
   following :any =[]
   categori :string[]=[]
   currentCateg:string[]=[]
@@ -32,6 +36,8 @@ user :any
   postslike :string[]=[]
   likescount :number[]=[]
   userId ! :string
+filter :string =""
+  f =new Subject<string>().subscribe(_=>this.filter = this.postservice.filter)
   ngOnInit(): void {
 
 
@@ -138,9 +144,12 @@ user :any
         this.following =following
         console.log(this.following)
       })
-
+      this.jobservice.sugest(this.user.langage).subscribe(jobs=>{
+        this.jobs=jobs
+      })
 
     })}
+
   }
 
   onAddPost(){
@@ -216,5 +225,12 @@ user :any
       this.router.navigate(["profil"])
     else
       this.router.navigate([`otherProfil/${id}`])
+  }
+  readPost(postId : string , poster : string){
+    this.router.navigate([`post/${postId}/${poster}`])
+  }
+  turnOffComments(idpost :string){
+    console.log(idpost)
+    this.postservice.turnOffComments(idpost)
   }
 }

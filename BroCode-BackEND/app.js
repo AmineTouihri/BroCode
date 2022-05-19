@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const userRoutes=require("./Modules/Routes/User");
 const postRoutes=require("./Modules/Routes/post");
 const likeRoutes = require('./Modules/Routes/like')
+const commentRoutes = require('./Modules/Routes/comment')
+const jobtRoutes = require('./Modules/Routes/job')
 // const googleUserRoutes=require("./Modules/Routes/googleUser");
 const bodyParser=require("body-parser");
 const path = require('path')
@@ -31,6 +33,8 @@ app.use((req,res,next)=>{
 app.use("/api/user",userRoutes);
 app.use("/api/post",postRoutes);
 app.use("/api/like",likeRoutes);
+app.use("/api/comment",commentRoutes);
+app.use("/api/job",jobtRoutes);
 // app.use("/api/googleuser",googleUserRoutes);
 
 app.get("/",(req ,res)=>{
