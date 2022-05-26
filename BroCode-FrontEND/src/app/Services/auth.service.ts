@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {Subject} from "rxjs";
 import {Router} from "@angular/router";
 import {FormGroup, NgForm} from "@angular/forms";
+import * as dayjs from "dayjs";
 
 
 @Injectable({
@@ -49,7 +50,12 @@ const auth:authModel={email:email,password:password}
   //----------------------------register---------------------------------
 
   createUser(email:string,password:string,name:string){
-  const user={email:email,password:password,name:name}
+    const d = new Date()
+    let day = d.getDate()
+    let month = d.getMonth()+1
+    let year = d.getFullYear()
+    const fulldate=day+'-'+month+'-'+year
+  const user={email:email,password:password,name:name , formatDate :fulldate}
     console.log(user)
     this.http.post('http://localhost:8000/api/user/signUp',user).subscribe(result=>{
       console.log(result);
@@ -94,7 +100,7 @@ const auth:authModel={email:email,password:password}
   }
   getUser(){
 
-    return this.http.get<{_id :string , firstname : string , lastname : string , email : string , phone : string , proPhone : string , location : string , linkedin : string , facebook : string , twitter : string , bio : string, github :string , birth : string , isNew: boolean , imagepath : string  } >('http://localhost:8000/api/user/')
+    return this.http.get<{_id :string , firstname : string , lastName : string , email : string , phone : string , proPhone : string , location : string , linkedin : string , facebook : string , twitter : string , bio : string, github :string , birth : string , isNew: boolean , imagepath : string , role :string } >('http://localhost:8000/api/user/')
 
   }
   getcurrentUser(){
@@ -169,6 +175,11 @@ getFollowing(following: any){
     following :following
   }
  return  this.http.post('http://localhost:8000/api/user/getfollowing', obj)
+
+}
+
+getUsersStatistic(){
+  return this.http.get<{ states: any , fb :any ,twitter :any , linkedin :any ,github :any }>('http://localhost:8000/api/user/statistic')
 
 }
 }

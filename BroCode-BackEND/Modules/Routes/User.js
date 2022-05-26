@@ -63,12 +63,14 @@ route.post('/signUp',(req,res,next)=>{
             password:hash,
             name:req.body.name,
             verified:false,
-            isNew:true
-        });
-        user.save().then(result=>{
+            isNew:true ,
+            formatDate: req.body.formatDate
+        }).save().then(result=>{
             console.log(result)
             sendVerificationEmail({_id:result._id+"",email:result.email},res);
-        }).catch(error=>{res.status(400).json({message:"oups we can't add user somthing went wrong!"})})
+        }).catch(error=>{
+        console.log(error)
+        {res.status(400).json({message:"oups we can't add user somthing went wrong!"})}})
     })
 })
 
@@ -301,6 +303,7 @@ route.put("/savelangage",checkauth,(req,res,next)=>{
 route.get("",checkauth , (req ,res)=>{
     const id = req.userData.userId;
     User.findById(id).then(resul=>{
+        console.log(resul)
         res.json(resul)
     }, err=>{
         console.log(err)
@@ -346,4 +349,83 @@ route.post("/getfollowing" , checkauth ,(req ,res)=>{
         console.log(err)
     })
 })
+
+var states
+var fb
+var twitter
+var linkedin
+var github
+route.use('/statistic',(req, res , next )=>{
+    User.aggregate([
+        {
+            $group :{
+                _id : "$formatDate",
+                count:{$sum : 1}
+            }
+
+        }
+
+    ]).sort({date : 1}).then(res=>{
+        console.log(res)
+        states=res
+
+
+    })
+    next()
+})
+route.use('/statistic',(req, res , next )=>{
+
+    User.find({facebook: {$nin : ['null' ,'']}})
+        .then(res=>{
+            fb=res
+
+
+        })
+
+    next()
+})
+
+route.use('/statistic',(req, res , next )=>{
+
+    User.find({twitter: {$nin : ['null', '']}})
+        .then(res=>{
+            twitter=res
+
+
+        })
+    next()
+})
+route.use('/statistic',(req, res , next )=>{
+
+    User.find({github: {$nin : ['null', '']}})
+        .then(res=>{
+            github=res
+
+
+        })
+    next()
+})
+
+route.use('/statistic',(req, res , next )=>{
+
+    User.find({linkedin: {$nin : ['null' ,'']}})
+        .then(res=>{
+            linkedin=res
+
+
+        })
+    next()
+})
+
+route.get("/statistic", (req,res)=>{
+ res.status(200).json({
+     states :states,
+     fb:fb,
+     twitter:twitter,
+     linkedin: linkedin,
+     github :github
+ })
+})
+
+
 module.exports=route;

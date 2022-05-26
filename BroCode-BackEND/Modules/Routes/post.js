@@ -49,12 +49,21 @@ route.post("/add" ,checkauth,multer({storage : storage}).single('image'), (req ,
 })
 
 route.get("" ,(req ,res)=>{
-    Post.find().then(posts=>{
+    Post.find().sort({date : -1}).then(posts=>{
         res.status(201).json(posts)
     },err=>{
         console.log('something went wrong '+ err)
     })
 })
+
+route.get("/userPosts" ,checkauth,(req ,res)=>{
+    Post.find({userId : req.userData.userId}).sort({date : -1}).then(posts=>{
+        res.status(201).json(posts)
+    },err=>{
+        console.log('something went wrong '+ err)
+    })
+})
+
 
 route.post('/readlater',checkauth,(req,res,next)=>{
     const reaLater = new  readLater({
@@ -110,6 +119,28 @@ route.post("/getPost" ,(req,res)=>{
 route.post('/turnOffComments', checkauth,(req ,res)=>{
 
     Post.updateOne({_id: req.body.id},{$set:{comments:false}}).then(result=>{
-        console.log("status aupdated successfuly")})
+        console.log("comments status aupdated successfuly")})
+})
+route.post('/turnOnComments', checkauth,(req ,res)=>{
+
+    Post.updateOne({_id: req.body.id},{$set:{comments:true}}).then(result=>{
+        console.log("comments status aupdated successfuly")})
+})
+
+route.post('/switchState', checkauth,(req ,res)=>{
+     if(req.body.state){
+         Post.updateOne({_id: req.body.id},{$set:{private:false}}).then(result=>{
+             console.log("status aupdated successfuly")})
+     }
+     else{
+         Post.updateOne({_id: req.body.id},{$set:{private:true}}).then(result=>{
+             console.log("status aupdated successfuly")})
+     }
+})
+
+route.post('/deletePost', checkauth,(req ,res)=>{
+
+    Post.deleteOne({_id: req.body.id}).then(result=>{
+        console.log("deleted successfuly")})
 })
 module.exports=route;

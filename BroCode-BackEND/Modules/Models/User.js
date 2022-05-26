@@ -21,7 +21,9 @@ const userSchema=mongosse.Schema({
     bio :String ,
     date: { type: Date, default: Date.now },
     imagepath: String,
-    following :[]
+    following :[],
+    role :{ type: String, default: 'user' },
+    formatDate: String
 
 })
 userSchema.plugin(UniqueValidator);

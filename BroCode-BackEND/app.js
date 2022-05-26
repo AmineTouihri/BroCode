@@ -4,6 +4,7 @@ const postRoutes=require("./Modules/Routes/post");
 const likeRoutes = require('./Modules/Routes/like')
 const commentRoutes = require('./Modules/Routes/comment')
 const jobtRoutes = require('./Modules/Routes/job')
+const bugRoutes = require('./Modules/Routes/bug')
 // const googleUserRoutes=require("./Modules/Routes/googleUser");
 const bodyParser=require("body-parser");
 const path = require('path')
@@ -31,6 +32,7 @@ app.use((req,res,next)=>{
 
 //-----------------------------userRoute----------------
 app.use("/api/user",userRoutes);
+app.use("/api/bug",bugRoutes);
 app.use("/api/post",postRoutes);
 app.use("/api/like",likeRoutes);
 app.use("/api/comment",commentRoutes);

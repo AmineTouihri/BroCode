@@ -10,6 +10,7 @@ const postSchema=mongosse.Schema({
     categori : String ,
     comments :{ type: Boolean, default: true },
     date: { type: Date, default: Date.now },
+    private :{ type:Boolean, default: false },
 
 })
 postSchema.plugin(UniqueValidator);

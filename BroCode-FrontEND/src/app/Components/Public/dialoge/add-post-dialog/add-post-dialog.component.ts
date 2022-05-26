@@ -20,8 +20,10 @@ export class AddPostDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.authservice.getUser().subscribe(res=>{
+      console.log(res)
       this.firstname =res.firstname;
-      this.lastname =res.lastname ;
+      this.lastname =res.lastName ;
+      console.log(this.lastname)
       this.userImage =res.imagepath ;
 
     })

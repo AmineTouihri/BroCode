@@ -29,7 +29,7 @@ export class JobsComponent implements OnInit {
     this.isconnected =this.authservice.getIsLogedNow()
     this.jobservice.getJobs().subscribe(jobs=>{
       this.jobs =jobs
-      console.log(this.jobs)
+
     })
     if (this.isconnected){
       this.authservice.getUser().subscribe(usr=>{

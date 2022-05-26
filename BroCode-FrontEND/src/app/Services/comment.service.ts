@@ -19,6 +19,7 @@ export class CommentService {
       id :postId ,
       comment : comment
     }
+    console.log(obj)
     this.http.post('http://localhost:8000/api/comment/add', obj).subscribe(res=>{
       console.log('comment added ')
     })

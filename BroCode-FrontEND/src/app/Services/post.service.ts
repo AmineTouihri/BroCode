@@ -12,7 +12,7 @@ import {FormGroup, NgForm} from "@angular/forms";
 export class PostService {
 
   filter !:string
-  f = new Subject<string>().subscribe()
+  f = new Subject<string>()
   constructor( private http : HttpClient) {}
 
   addPost(form : FormGroup ,fname :string ,lname :  string , userimage : string){
@@ -28,14 +28,19 @@ export class PostService {
     })
   }
   getPosts(){
-   return  this.http.get<[{_id :string , imagepath: string, content :string , categori :string , date :Date ,userimage :string ,lname :string ,fname :string ,userId :string}]>('http://localhost:8000/api/post')
+   return  this.http.get<[{_id :string , imagepath: string, content :string , categori :string , date :Date ,userimage :string ,lname :string ,fname :string ,userId :string , comments :boolean ,private :boolean}]>('http://localhost:8000/api/post')
+
+  }
+
+  getUsersPosts(){
+    return  this.http.get<[]>('http://localhost:8000/api/post/userPosts')
 
   }
   getPost(id : string){
     const obj={
       id :id
     }
-    return  this.http.post<{_id :string , imagepath: string, content :string , categori :string , date :Date ,userimage :string ,lname :string ,fname :string ,userId :string}>('http://localhost:8000/api/post/getPost', obj)
+    return  this.http.post<{_id :string , imagepath: string, content :string , categori :string , date :Date ,userimage :string ,lname :string ,fname :string ,userId :string }>('http://localhost:8000/api/post/getPost', obj)
 
   }
 
@@ -71,5 +76,32 @@ export class PostService {
       console.log(res)
     })
   }
+  turnOnComments(idpost :string){
+    const obj ={
+      id :idpost
+    }
+    this.http.post('http://localhost:8000/api/post/turnOnComments' ,obj).subscribe(res=>{
+      console.log(res)
+    })
+  }
+  switchState(idpost :string , state :boolean){
+    const obj ={
+      state :state,
+      id :idpost
+    }
+    this.http.post('http://localhost:8000/api/post/switchState' ,obj).subscribe(res=>{
+      console.log(res)
+    })
+  }
+  deletePost(idpost :string ){
+    const obj ={
+
+      id :idpost
+    }
+    this.http.post('http://localhost:8000/api/post/deletePost' ,obj).subscribe(res=>{
+      console.log(res)
+    })
+  }
+
 }
 
