@@ -13,11 +13,12 @@
     </section>
 <!--    create offre d emploi-->
     <ng-container *ngFor="let job of jobs">
-      <div class="job" *ngIf="filters.length===0 || filters.includes(job.location) || filters.includes(job.level) || filters.includes(job.type)">
+      <div class="job" *ngIf="filters.length===0 ||( filters.includes(job.location) || filters.includes(job.level) || filters.includes(job.type))">
       <header>
         <div style="display: flex ;justify-content: center ;align-items: flex-start ;gap: .5rem ;font-size: large ;font-weight: 500;">
           <img [src]="job.imagepath" alt="" style="width: 45px; height: 45px; border-radius: 7px">
           <div class="name">{{job.name}}</div>
+          <div style="font-size: x-small ;color: #343a40">{{job.date}}</div>
 
         </div>
         <div class="save">save <i  style=" margin-left: 12px; " class="fas fa-bookmark"></i></div>

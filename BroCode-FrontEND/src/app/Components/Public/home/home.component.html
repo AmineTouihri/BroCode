@@ -25,21 +25,25 @@
     </div>
     <hr  style="margin-bottom: 1rem;">
     <div class="sugetions">
-      <p style="font-weight: 500 ;font-size: large; color: #0c2461;">{{filter}}</p>
+      <p style="font-weight: 500 ;font-size: large; color: #0c2461;">people you may know</p>
     </div>
 
   </div>
 <!--    ------------------------------ main section-----------------------------------  -->
   <div class="main" style="margin-left: 22rem; margin-top: 5rem;">
     <section class="creatPost"  *ngIf="isconnected" (click)="onAddPost()" >
-        <header id="idee-header">
-          <img style="width: 45px;height: 45px;border-radius:50%" [src]="user.imagepath" alt="">
-          <input   placeholder="feel free ..." id="feelfree" type="text" disabled style="background-color: #fff;">
-        </header>
+<!--        <header id="idee-header">-->
+<!--          <img style="width: 45px;height: 45px;border-radius:50%" [src]="user.imagepath" alt="">-->
+<!--          <input   placeholder="feel free ..." id="feelfree" type="text" disabled style="background-color: #fff;">-->
+<!--        </header>-->
+      <div class="opt" >add post</div>
+      <div class="opt" >add job</div>
+      <div class="opt" >add bug</div>
+      <div class="opt" >create challenge</div>
     </section>
 
     <ng-container *ngFor="let post of posts">
-      <div style=" margin-top: 2rem;" class="posts"  >
+      <div style=" margin-top: 2rem;" class="posts" *ngIf="!post.private && post.id !== userId"  >
 
 
         <header  >
@@ -58,9 +62,10 @@
                 <mat-icon><i style="color: red"  class="fal fa-exclamation-triangle"></i></mat-icon>
                 <span>signal</span>
               </button>
-              <button mat-menu-item style="color:#0c2461" *ngIf="post.id===userId" (click)="turnOffComments(post.idPost)">
+              <button mat-menu-item style="color:#0c2461" *ngIf="post.id===userId" (click)="turnOffComments(post.idPost ,post.comments)">
                 <mat-icon><img style="z-index: 25;width: 40px ;height: 25px;" src="../../../assets/images/chat.png" alt=""></mat-icon>
-                <span>turn off comments</span>
+                <span *ngIf="post.comments">turn off comments</span>
+                <span *ngIf="!post.comments">turn on comments</span>
               </button>
             </mat-menu>
           </div>

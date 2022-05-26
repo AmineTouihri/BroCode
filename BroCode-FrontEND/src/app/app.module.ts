@@ -29,6 +29,13 @@ import { JobDialogComponent } from './Components/Public/dialoge/job-dialog/job-d
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from "@angular/material/select";
 import { BugsComponent } from './Components/Public/bugs/bugs.component';
+import { AuthDialogComponent } from './Components/Public/dialoge/auth-dialog/auth-dialog.component';
+import { ChartsComponent } from './Components/Private/charts/charts.component';
+import { UserJobsComponent } from './Components/Public/user-jobs/user-jobs.component';
+import { SavesComponent } from './Components/Public/saves/saves.component';
+import { BugDialogComponent } from './Components/Public/dialoge/bug-dialog/bug-dialog.component';
+import { ShareDialogComponent } from './Components/Public/dialoge/share-dialog/share-dialog.component';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -47,7 +54,13 @@ import { BugsComponent } from './Components/Public/bugs/bugs.component';
     JobsComponent,
     SinglePostComponent,
     JobDialogComponent,
-    BugsComponent
+    BugsComponent,
+    AuthDialogComponent,
+    ChartsComponent,
+    UserJobsComponent,
+    SavesComponent,
+    BugDialogComponent,
+    ShareDialogComponent
 
 
   ],
@@ -64,7 +77,8 @@ import { BugsComponent } from './Components/Public/bugs/bugs.component';
     MatSidenavModule,
     MatBadgeModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule
 
 
   ],

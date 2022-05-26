@@ -6,11 +6,11 @@ import {MatDialog} from "@angular/material/dialog";
 import {PostService} from "../../../Services/post.service";
 import {LikeService} from "../../../Services/like.service";
 import * as dayjs from "dayjs";
-import {DialogComponent} from "../dialoge/upgrad-profil-dialog/dialog.component";
 import {Router} from "@angular/router";
 import {CommentService} from "../../../Services/comment.service";
 import {JobService} from "../../../Services/job.service";
-import {Subject} from "rxjs";
+
+import {AuthDialogComponent} from "../dialoge/auth-dialog/auth-dialog.component";
 
 /**
  * @title Menu with icons
@@ -36,10 +36,7 @@ user :any
   postslike :string[]=[]
   likescount :number[]=[]
   userId ! :string
-filter :string =""
-  f =new Subject<string>().subscribe(_=>this.filter = this.postservice.filter)
   ngOnInit(): void {
-
 
     this.isconnected =this.authservice.getIsLogedNow()
  // ------------------ importing the posts that the user liked ------------------
@@ -58,7 +55,7 @@ filter :string =""
             this.likescount.push(i.count)
           }
           this.postservice.getPosts().subscribe(posts => {
-
+            console.log(posts)
             for (let i of posts) {
 
               if (this.postslike.indexOf(i._id) >= 0) {
@@ -78,10 +75,12 @@ filter :string =""
                 fname: i.fname,
                 date: dayjs(i.date).format('MMM /DD  HH:mm A'),
                 fulldate: dayjs(i.date).format('dddd MMMM /DD /YYYY HH:mm A'),
-                categ: i.categori
+                categ: i.categori ,
+                comments :i.comments,
+                private : i.private
               }
               this.posts.push(obj)
-              console.log(this.posts)
+
             }
           })
         })
@@ -115,7 +114,8 @@ filter :string =""
               fname: i.fname,
               date: dayjs(i.date).format('MMM /DD  HH:mm A'),
               fulldate: dayjs(i.date).format('dddd MMMM /DD /YYYY HH:mm A'),
-              categ: i.categori
+              categ: i.categori ,
+              comments :i.comments
             }
             this.posts.push(obj)
             console.log(this.posts)
@@ -130,7 +130,7 @@ filter :string =""
           this.categori.push(i.idpost)
         }
 
-          console.log(this.categori)
+
       }
       )
     }
@@ -142,10 +142,15 @@ filter :string =""
       this.authservice.getFollowing(this.user.following).subscribe(following=>{
 
         this.following =following
-        console.log(this.following)
+
       })
       this.jobservice.sugest(this.user.langage).subscribe(jobs=>{
-        this.jobs=jobs
+
+        for(let i=0 ; i<2 ;i++){
+          this.jobs.push(jobs[i])
+        }
+
+
       })
 
     })}
@@ -189,7 +194,7 @@ filter :string =""
     }
     else{
 
-      this.dialog.open(DialogComponent);
+      this.dialog.open(AuthDialogComponent);
 
     }
   }
@@ -213,6 +218,9 @@ filter :string =""
       }
 
     }
+    else{
+      this.dialog.open(AuthDialogComponent);
+    }
   }
 
 
@@ -229,8 +237,12 @@ filter :string =""
   readPost(postId : string , poster : string){
     this.router.navigate([`post/${postId}/${poster}`])
   }
-  turnOffComments(idpost :string){
-    console.log(idpost)
+  turnOffComments(idpost :string ,comments :boolean){
+    console.log(comments)
+    if(comments)
+
     this.postservice.turnOffComments(idpost)
+    else
+      this.postservice.turnOnComments(idpost)
   }
 }

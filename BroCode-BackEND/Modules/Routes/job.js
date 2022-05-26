@@ -2,7 +2,9 @@ const express = require('express')
 const route = express.Router()
 const Job= require('../Models/job')
 const Apply= require('../Models/apply')
+const User= require('../Models/User')
 const checkauth = require('../../middlewares/check-auth')
+const Post = require("../Models/post");
 
 
 
@@ -24,12 +26,21 @@ route.post('/add',checkauth,(req,res)=>{
     })
 })
 route.get("" ,(req ,res)=>{
-    Job.find().then(posts=>{
-        res.status(201).json(posts)
+    Job.find().sort({date : -1}).then(jobs=>{
+        res.status(201).json(jobs)
     },err=>{
         console.log('something went wrong '+ err)
     })
 })
+
+route.get("/userJobs" ,checkauth,(req ,res)=>{
+    Job.find({iduser :req.userData.userId}).sort({date : -1}).then(jobs=>{
+        res.status(201).json(jobs)
+    },err=>{
+        console.log('something went wrong '+ err)
+    })
+})
+
 
 route.post('/apply',checkauth,(req,res)=> {
         Job.updateOne({_id:req.body.idpost},{$inc :{applied :1}}).then(res=>{
@@ -53,4 +64,40 @@ route.post('/sugest',checkauth,(req,res)=> {
     })
 
     })
+route.post('/showApplied',checkauth,(req,res)=> {
+    Apply.find({idpost: req.body.idJob}).then(apply=>{
+        console.log(apply)
+        const ids= []
+        for(let appli of apply){
+            ids.push(appli.iduser)
+        }
+        console.log(ids)
+        User.find({_id:{$in: ids}}).then(users=>{
+            res.status(200).json(users)
+        },err=>{
+            console.log(err)
+        })
+    },err=>{
+        console.log(err);
+    })
+
+})
+
+route.post('/switchStatus',checkauth,(req,res)=> {
+    if(req.body.status){
+        Job.updateOne({_id: req.body.idJob},{$set:{full:false}}).then(result=>{
+            console.log("comments status aupdated successfuly")})
+    }else{
+        Job.updateOne({_id: req.body.idJob},{$set:{full:true}}).then(result=>{
+            console.log("comments status aupdated successfuly")})
+    }
+
+
+})
+route.post('/deleteJob',checkauth,(req,res)=> {
+    Job.deleteOne({_id: req.body.idJob}).then(result=>{
+        console.log("deleted successfuly")})
+
+})
+
 module.exports = route

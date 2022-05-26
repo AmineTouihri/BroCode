@@ -15,6 +15,7 @@ const jobModel= mongoos.Schema({
     date: { type: Date, default: Date.now },
     tech :[],
     applied: { type: Number, default: 0 },
+    full: { type: Boolean, default: false },
 
 })
 module.exports= mongoos.model('Job',jobModel)

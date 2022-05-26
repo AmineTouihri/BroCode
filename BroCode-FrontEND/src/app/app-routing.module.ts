@@ -10,6 +10,8 @@ import {OtherProfilComponent} from "./Components/Public/other-profil/other-profi
 import {JobsComponent} from "./Components/Public/jobs/jobs.component";
 import {SinglePostComponent} from "./Components/Public/single-post/single-post.component";
 import {BugsComponent} from "./Components/Public/bugs/bugs.component";
+import {ChartsComponent} from "./Components/Private/charts/charts.component";
+import {UserJobsComponent} from "./Components/Public/user-jobs/user-jobs.component";
 
 
 const routes: Routes = [
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path: "otherProfil/:id" , component : OtherProfilComponent},
   {path: "jobs" , component : JobsComponent ,canActivate:[AuthGuard]},
   {path: "post/:id/:poster" , component : SinglePostComponent},
-  {path: "bugs" , component :BugsComponent ,canActivate:[AuthGuard] }
+  {path: "bugs" , component :BugsComponent ,canActivate:[AuthGuard] },
+  {path: "charts" , component :ChartsComponent ,canActivate:[AuthGuard] },
+  {path: "yourJobs" , component :UserJobsComponent ,canActivate:[AuthGuard] }
 
 ];
 
